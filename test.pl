@@ -1,7 +1,7 @@
 use Test;
 use Benchmark qw(timediff timestr);
 
-BEGIN { plan tests => 6 }
+BEGIN { plan tests => 4 }
 END   { print "not ok 1\n" unless $loaded }
 
 my $key       = pack "H*", '1234567890ABCDEFFEDCBA0987654321';
@@ -17,24 +17,6 @@ if ($@) { print "skipping Crypt::CBC test\n"; }
 else {
     print "trying CBC... ";
     my $c = Crypt::CBC->new($key, "NULL") || die "$!\n";
-    my $t = $c->encrypt_hex($plaintext);
-    ok($plaintext, $c->decrypt_hex($t));
-}
-
-eval 'use Crypt::CBC_R';
-if ($@) { print "skipping Crypt::CBC_R test\n"; }
-else {
-    print "trying CBC_R... ";
-    my $c = Crypt::CBC_R->new($key, "NULL") || die "$!\n";
-    my $t = $c->encrypt_hex($plaintext);
-    ok($plaintext, $c->decrypt_hex($t));
-}
-
-eval 'use Crypt::CBC_IL';
-if ($@) { print "skipping Crypt::CBC_IL test\n"; }
-else {
-    print "trying CBC_IL... ";
-    my $c = Crypt::CBC_IL->new($key, "NULL") || die "$!\n";
     my $t = $c->encrypt_hex($plaintext);
     ok($plaintext, $c->decrypt_hex($t));
 }

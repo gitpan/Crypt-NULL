@@ -1,4 +1,4 @@
-# $Id: NULL.pm,v 1.00 2001/03/31 19:49:57 ams Exp $
+# $Id: NULL.pm,v 1.02 2001/05/04 08:04:27 ams Exp $
 # Copyright 2001 Abhijit Menon-Sen <ams@wiw.org>
 
 package Crypt::NULL;
@@ -7,7 +7,7 @@ use strict;
 use Carp;
 use vars qw( $VERSION );
 
-($VERSION) = q$Revision: 1.00 $ =~ /(\d+\.\d+)/;
+($VERSION) = q$Revision: 1.02 $ =~ /(\d+\.\d+)/;
 
 sub keysize   () { 16 }
 sub blocksize () { 16 }
@@ -17,14 +17,14 @@ sub new
     my ($class, $key) = @_;
 
     croak "Usage: ".__PACKAGE__."->new(\$key)" unless $key;
-    return bless {}, ref($class) || $class;
+    return bless {}, $class;
 }
 
 sub encrypt
 {
     my ($self, $data) = @_;
 
-    croak "Usage: \$null->encrypt(\$data)" unless ref($self) && $data;
+    croak "Usage: \$cipher->encrypt(\$data)" unless ref($self) && $data;
     return $data;
 }
 
@@ -32,7 +32,7 @@ sub decrypt
 {
     my ($self, $data) = @_;
 
-    croak "Usage: \$null->decrypt(\$data)" unless ref($self) && $data;
+    croak "Usage: \$cipher->decrypt(\$data)" unless ref($self) && $data;
     return $data;
 }
 
@@ -48,11 +48,11 @@ Crypt::NULL - NULL Encryption Algorithm
 
 use Crypt::NULL;
 
-$null = Crypt::NULL->new($key);
+$cipher = Crypt::NULL->new($key);
 
-$ciphertext = $null->encrypt($plaintext);
+$ciphertext = $cipher->encrypt($plaintext);
 
-$plaintext  = $null->decrypt($ciphertext);
+$plaintext  = $cipher->decrypt($ciphertext);
 
 =head1 DESCRIPTION
 
@@ -74,7 +74,7 @@ Returns the size (in bytes) of the block (16, in this case).
 
 Returns the size (in bytes) of the key (16, in this case).
 
-=item new($key, $rounds)
+=item new($key)
 
 This creates a new Crypt::NULL object with the specified key.
 
@@ -92,7 +92,7 @@ plaintext.
 
 =head1 SEE ALSO
 
-Crypt::CBC, Crypt::TEA, Crypt::Blowfish
+Crypt::CBC, Crypt::TEA, Crypt::Twofish
 
 =head1 AUTHOR
 
@@ -100,5 +100,5 @@ Abhijit Menon-Sen <ams@wiw.org>
 
 Copyright 2001 Abhijit Menon-Sen. All rights reserved.
 
-This is free software; you may redistribute and/or modify it under the
-same terms as Perl itself.
+This software is distributed under the terms of the Artistic License
+<URL:http://ams.wiw.org/code/artistic.txt>.

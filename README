@@ -25,7 +25,7 @@ DESCRIPTION
     keysize
         Returns the size (in bytes) of the key (16, in this case).
 
-    new($key, $rounds)
+    new($key)
         This creates a new Crypt::NULL object with the specified key.
 
     encrypt($data)
@@ -44,5 +44,5 @@ AUTHOR
 
     Copyright 2001 Abhijit Menon-Sen. All rights reserved.
 
-    This is free software; you may redistribute and/or modify it
-    under the same terms as Perl itself.
+    This software is distributed under the terms of the Artistic License
+    <URL:http://ams.wiw.org/code/artistic.txt>.
